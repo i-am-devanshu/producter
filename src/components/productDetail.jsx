@@ -2,9 +2,13 @@ import { useState } from 'react';
 import backIcon from '../icons/back.svg';
 import bagIcon from '../icons/bag.svg';
 import likeIcon from '../icons/like.svg';
+import { Link, useLocation } from 'react-router-dom';
 
 
-export default function ProductDetail(props) {
+export default function ProductDetail() {
+
+    const location = useLocation();
+    const product = location.state;
 
     let [qty, setQty] = useState(1);
 
@@ -22,22 +26,22 @@ export default function ProductDetail(props) {
 
     return <>
 
-        <div className="mx-auto max-w-screen-xl py-6 px-5 md:p-10">
-
+        <div className=" max-w-screen-xl mx-auto py-6 px-5 md:p-10">
+            
             <div className="flex space-x-2 items-center">
-                <button>
+                <Link to="/">
                     <img className='w-8 h-8' src={backIcon} alt="back" />
-                </button>
-                <span className=' text-gray-700 font-black '>{props.category}</span>
+                </Link>
+                <span className=' text-gray-700 font-black '>{product.category}</span>
             </div>
 
             <div className='md:flex mt-5 md:gap-16'>
                 <div className="w-full md:w-1/3 flex justify-center">
-                    <img src={props.img} className='w-56 md:w-72' alt="img" />
+                    <img src={product.image} className='w-56 md:w-60' alt="img" />
                 </div>
                 <div className='md:w-2/3 mt-8 md:mt-0'>
-                    <h2 className='text-2xl md:text-3xl mb-5'>{props.title}</h2>
-                    <p className='text-gray-600 text-sm max-w-2xl mb-5'>{props.description}</p>
+                    <h2 className='text-2xl md:text-3xl mb-5'>{product.title}</h2>
+                    <p className='text-gray-600 text-sm max-w-2xl mb-5'>{product.description}</p>
 
                     <div className="flex gap-8 justify-between md:justify-start  item-center  my-5">
                         <div className='text-center'>
@@ -77,8 +81,8 @@ export default function ProductDetail(props) {
                     </div>
 
                     <div className="flex gap-5 items-baseline">
-                        <p className='font-black  text-4xl mb-5 tracking-wide '>₹{props.price}</p>
-                        <p className='text-gray-400 line-through  text-2xl mb-5 tracking-wide '>₹{parseFloat(props.price) + 180}</p>
+                        <p className='font-black  text-4xl mb-5 tracking-wide '>₹{product.price}</p>
+                        <p className='text-gray-400 line-through  text-2xl mb-5 tracking-wide '>₹{parseFloat(product.price) + 180}</p>
                     </div>
 
                     <div className="space-x-5 pt-5 flex">
